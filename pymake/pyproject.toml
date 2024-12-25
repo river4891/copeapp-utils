@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pymake"
+authors = [
+    {name = "tower_town", email = "tower_town@outlook.com"},
+]
+description = "pymake for codeapp"
+readme = "README.md"
+requires-python = ">=3.8"
+keywords = ["codeapp", "make"]
+license = {text = "MIT"}
+classifiers = [
+    # "Framework :: Django",
+    "Programming Language :: Python :: 3",
+]
+dependencies = [
+    'importlib-metadata; python_version<="3.10"',
+]
+
+dynamic = ["version"]
+
+[tool.setuptools.dynamic]
+version = {attr = "pymake.__version__"}
+
+[project.optional-dependencies]
+pdf = ["ReportLab>=1.2", "RXP"]
+rest = ["docutils>=0.3", "pack ==1.1, ==1.3"]
+
+[project.scripts]
+pymake = "pymake.main:cli"
+
+[tool.setuptools.packages.find]
+where = ["src"]  # list of folders that contain the packages (["."] by default)
+include = ["pymake*"]  # package names should match these glob patterns (["*"] by default)
+exclude = ["pymake.tests*"]  # exclude packages matching these glob patterns (empty by default)
+namespaces = false  # to disable scanning PEP 420 namespaces (true by default)
+
+# ... other project metadata fields as listed in:
+#     https://packaging.python.org/en/latest/guides/writing-pyproject-toml/
